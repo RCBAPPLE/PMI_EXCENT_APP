@@ -110,7 +110,7 @@
     <!-- Popups -->
     <div class="overlay" id="overlay"></div>
     <div class="popup-logig" id="popup-logig">
-        <img src="{% static 'images/logigrammes/testlog.png' %}" alt="Logigramme actif">
+        <img src="{% static 'images/logigrammes/logigramme'%} {{ question.partie }}.png" alt="Logigramme actif">
         <button onclick="closePopup_logig()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
     </div>
     <div class="popup-comm" id="popup-comm">

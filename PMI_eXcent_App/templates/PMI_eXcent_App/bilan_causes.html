@@ -53,12 +53,16 @@
                 {% if langue == 'FR' %}
                 <ul>
                     <li>{{Solution.cause_racine_1_FR}}</li>
-                    <li>{% if Solution.cause_racine_2_FR %} {{Solution.cause_racine_2_FR}} {% endif %}</li>
+                    {% if Solution.cause_racine_2_FR %}
+                    <li> {{Solution.cause_racine_2_FR}} </li>
+                    {% endif %}
                 </ul>
                 {% else %}
                 <ul>
                     <li>{{Solution.cause_racine_1_EN}} </li>
-                    <li>{% if Solution.cause_racine_2_EN %} {{Solution.cause_racine_2_EN}} {% endif %}</li>
+                    {% if Solution.cause_racine_2_EN %}
+                    <li> {{Solution.cause_racine_2_EN}} </li>
+                    {% endif %}
                 </ul>
                 {% endif %}
             </div>
@@ -66,20 +70,30 @@
                 {% if langue == 'FR' %}
                 <ul>
                     <li>{{Solution.resolution_1_FR}}</li>
-                    <li>{% if Solution.resolution_2_FR %} {{Solution.resolution_2_FR}} {% endif %}</li>
+                    {% if Solution.resolution_2_FR %} 
+                    <li>{{Solution.resolution_2_FR}} </li>
+                    {% endif %}
                 </ul>
                 {% else %}
                 <ul>
                     <li>{{Solution.resolution_1_EN}}</li>
-                    <li>{% if Solution.resolution_2_EN %} {{Solution.resolution_2_EN }} {% endif %}</li>
+                    {% if Solution.resolution_2_EN %}
+                    <li> {{Solution.resolution_2_EN }} </li>
+                    {% endif %}
                 </ul>
                 {% endif %}
             </div>
         </div>
         {% else %}
         <div style = "display: flex; justify-content: center; align-items: center;margin-top: 10%;">
-            <strong style="color: red">{% if Txt_autre == 'nan' %} 
-                {% else %}{{ Txt_autre }} {% endif %}
+            <strong style="color: red">
+                {% if Txt_autre == 'nan' %} 
+
+                {% elif Txt_autre == 'Automate' %}
+                Une intervention nécessaire afin de réaliser un Automate
+                {% else %}
+                {{ Txt_autre }} 
+                {% endif %}
             </strong>
         </div>
         {% endif %}
