@@ -1,0 +1,559 @@
+/* Ce fichier regroupe les lignes de code qui définissent l'aspect de la page de question. */
+/* La partie ci-après est commne à toutes les pages du site */
+* {
+    margin: 0;
+}
+
+body{
+    background-color: white;
+    font-family: "Gill Sans MT", sans-serif;
+    font-size: 2em;   
+}
+
+h1 { 
+    font-family: "Gill Sans MT", sans-serif; 
+    font-size: 24px; font-style: normal; font-variant: normal; 
+    font-weight: 700; line-height: 26.4px; 
+}
+ 
+h2 { 
+    font-family: "Gill Sans MT", sans-serif; 
+    font-size: 14px; font-style: normal; font-variant: normal; 
+    font-weight: 700; line-height: 15.4px; 
+} 
+
+p {
+     font-family: "Gill Sans MT", sans-serif; 
+     font-size: 14px; font-style: normal; font-variant: normal; 
+     font-weight: 400; line-height: 20px; 
+} 
+
+a {
+    color: #242424;
+    text-decoration: none;
+}
+a:hover {
+    opacity : 0.8;
+    cursor: pointer;
+}
+
+
+/* La partie ci-après définit l'aspect de la partie supérieure de la page */
+nav {
+    
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(231,230,230);
+}
+
+.lien-logig {
+    /* Cases contenant les liens vers les différentes étapes */
+    background-color: rgb(124,187,103);
+    border-radius : 10px ;
+    padding : 0.8em 1.2em ;
+    box-shadow: 0px 0px 10px -5px black;
+    border: 1px solid black ;
+} 
+
+.triangle {
+    /* Définition des triangles entre les cases*/
+    position:relative;
+    padding: -0.6em;
+    width: 0px;
+}
+.triangle::after {
+    /* Espacement entre les triangles */
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -0.5em;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 25px 0 25px 25px; /* Triangle pointant vers la droite */
+    border-color: transparent transparent transparent rgb(124,187,103);
+}
+
+.lien-logig:hover {
+    box-shadow: 0px 0px 10px 3px black; /* Assombrissement des liens vers les différentes parties du test */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.logo-accueil {
+    /* Logo eXcent */
+    width: 8em;
+    height : 5em;
+    box-shadow: 0px 0px 10px -5px black; 
+}
+.lien-site {
+    /* Lien vers le site eXcent dans le logo */
+    background-color: none;
+    margin: 0.2px;
+    box-shadow: 0px 0px 10px -5px black; 
+}
+
+
+/* Cette partie définit les éléments à gauche de la page ainsi que la forme du bloc question */
+.main-grid {
+    /* Grille de répartition de la page */
+    display :grid;
+    grid-template-columns: 20% 80%; /* La colonne de gauche prend 20% de la page, la colonne de droite 80% */
+    grid-template-rows: 1fr 1fr 3fr; /* La grille est divisée en 3 lignes. La 3e est 3 fois plus grande que les deux premières */
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top : 0.1em;
+    margin-bottom: 0.1em;
+    padding: 0.6em;  
+    height: 15em; 
+}
+
+.acces-logig {
+    /* Bloc cliquable permettant d'accéder au logigramme actif */
+    position: relative;
+    box-shadow: 0px 0px 10px -5px black;
+    border: 1px solid black ;
+    grid-row : 1/2; /* Positionné sur la première ligne */
+    grid-column : 1/2; /* Positionné sur la première colonne */
+    background-color: rgb(140,209,240);
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 7px;
+}
+.acces-logig:hover {
+    box-shadow: 0px 0px 10px 3px black; /* Ombre lors du survol par le curseur */
+}
+
+.comm {
+    /* Bloc cliquable pour laisser un commentaire */
+    grid-row : 2/3; /* Positionné sur la deuxième ligne */
+    grid-column : 1/2; /* Positionné sur la première colonne */
+    background-color: rgb(140,209,240);
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 7px;
+    border: 1px solid black ;
+    box-shadow: 0px 0px 10px -5px black; 
+}
+.comm:hover {
+    box-shadow: 0px 0px 10px 3px black; /* Ombre lors du survol par le curseur */
+}
+
+.image-question {
+    /* Illustration de la question présente en bas à gauche */
+    grid-row : 3/4; /* Positionné sur la troisième ligne */
+    grid-column: 1/2; /* Positionné sur la première colonne */
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.08em;
+    box-shadow: 0px 0px 10px -5px black; 
+}
+.image-question:hover {
+    box-shadow: 0px 0px 10px 3px black; /* Ombre lors du survol par le curseur */
+}
+
+.img-q{
+    /* Définition de la forme de l'image en elle-même */
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+}
+
+/* La partie suivante définit l'aspect des éléments présents dans le bloc question */
+.question-grid {
+    /* Définition de la grille permettant d'organiser tous les éléments */
+    grid-row : 1/4; /* Positionné sur toutes les lignes de la grille principale*/
+    grid-column : 2/3; /* Positionné sur la dernière colonne de la grille principale*/
+    background-color: rgb(135,136,136);
+    border-radius : 10px ;
+    padding : 0.8em 1em ;
+    display : grid ;
+    grid-template-columns: 10% 15% 15% 15% 15% 15% 10%;
+    grid-template-rows: 1fr 4fr 3fr 1fr;
+
+}
+
+.logi-actif {
+    /* Bloc contenant le nom du logigramme actif */
+    grid-row : 1/2; /* Positionné sur la première ligne de la grille*/
+    grid-column: 1/4; /* Positionné sur la première et la deuxième colonne de la grille*/
+    background-color: rgb(249,182,43);
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin: 0.08em;
+    height:75%;
+    border: 1px solid black ;
+}
+
+.pictogramme {
+    /* Bloc contenant les pictgrammes */
+    grid-row : 1/2; /* Positionné sur la première ligne de la grille*/
+    grid-column: 5/8; /* Positionné de la 4e à la dernière colonne de la grille*/
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.08em;
+    max-width: 100%;
+    background-color:rgb(249,182,43) ;
+    height:75%;
+    border: 1px solid black ;
+}
+.img-pict{
+    /* Définition de la forme des images des pictogrammes */
+    padding: 0.4em;
+    height:75%;
+}
+
+.question{
+    /* Définition de l'encart blanc contenant le texte de la question */
+    grid-row : 2/3; /* Positionné sur la deuxième ligne de la grille*/
+    grid-column: 1/9; /* Positionné sur toutes les colonnes de la grille*/
+    background-color: white;
+    border-radius : 10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin: 0.8em;
+}
+
+/* Cas avec 1 réponse */
+.response-count-1 .reponse-1 {
+    grid-row: 3/4;
+    grid-column: 4/5;
+}
+
+/* Cas avec 2 réponses */
+.response-count-2 .reponse-1 {
+    grid-row: 3/4;
+    grid-column: 3/4;
+    background-color: rgb(124,187,103);
+}
+.response-count-2 .reponse-2 {
+    grid-row: 3/4;
+    grid-column: 5/6;
+    background-color: red;
+}
+
+/* Cas avec 3 réponses */
+.response-count-3 .reponse-1 {
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+.response-count-3 .reponse-2 {
+    grid-row: 3/4;
+    grid-column: 3/4;
+}
+.response-count-3 .reponse-3 {
+    grid-row: 3/4;
+    grid-column: 4/5;
+}
+
+/* Cas avec 4 réponses */
+.response-count-4 .reponse-1 {
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+.response-count-4 .reponse-2 {
+    grid-row: 3/4;
+    grid-column: 3/4;
+}
+.response-count-4 .reponse-3 {
+    grid-row: 3/4;
+    grid-column: 4/5;
+}
+.response-count-4 .reponse-4 {
+    grid-row: 3/4;
+    grid-column: 5/6;
+}
+
+/* Cas avec 5 réponses */
+.response-count-5 .reponse-1 {
+    grid-row: 3/4;
+    grid-column: 2/3;
+}
+.response-count-5 .reponse-2 {
+    grid-row: 3/4;
+    grid-column: 3/4;
+}
+.response-count-5 .reponse-3 {
+    grid-row: 3/4;
+    grid-column: 4/5;
+}
+.response-count-5 .reponse-4 {
+    grid-row: 3/4;
+    grid-column: 5/6;
+}
+.response-count-5 .reponse-5 {
+    grid-row: 3/4;
+    grid-column: 6/7;
+}
+
+/* Style des réponses */
+.reponse {
+    text-align: center;
+    padding: 10px 0;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgb(249,182,43);
+    border-radius : 10px;
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    margin: 0.8em;
+    
+    width: 10vw;
+    box-shadow: 0px 0px 10px -5px black; 
+    border: 1px solid black ;
+}
+
+.reponse a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+}
+
+.reponse:hover {
+    box-shadow: 0px 0px 10px 3px black;
+}
+
+.fleche-retour{
+    /* Bloc de retour en arrière */
+    grid-row : 4/5; /* Positionné sur la 4e ligne de la grille*/
+    grid-column: 1/3;  /* Positionné sur les 2 premières lignes de la grille*/
+    background-color: rgb(140,209,240);
+    border-radius : 0.4em ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.8em;
+    width: 100%;
+    box-shadow: 0px 0px 10px -5px black;
+    border: 1px solid black ;
+}
+.fleche-retour:hover {
+    box-shadow: 0px 0px 10px 3px black;
+}
+
+.info{
+    grid-row : 4/5; /* Positionné sur la 4e ligne de la grille*/
+    grid-column: 6/9; /* Positionné sur les deux dernières colonnes de la grille*/
+    background-color: rgb(140,209,240);
+    border-radius : 0.4em ;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.8em;
+    padding: 0.4em;
+    
+    box-shadow: 0px 0px 10px -5px black;
+    border: 1px solid black ;
+}
+.info:hover {
+    box-shadow: 0px 0px 10px 3px black;
+}
+
+/* La partie suivante définit les éléments des popups */
+.overlay {
+    /* Fond grisé lorsque le popup apparait */
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup-logig {
+    /* Popup affichant le logigramme dans lequel la question se trouve (actif) */
+    visibility: hidden ; /* Masqué par défaut */
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.8em;
+    z-index: 1000;
+    max-height: 100%;
+}
+
+.popup-logig img {
+    /* Image du logigramme */
+    object-fit: contain;
+    margin: 0.6em;
+}
+
+.popup-logig button {
+    /* Bouton de fermeture */
+    margin: 5px;
+    height : 0.8em;
+}
+
+.popup-img {
+    /* Popup affichant les images d'illustration de la question */
+    visibility: hidden ; /* Masqué par défaut */
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.8em;
+    z-index: 1000;
+    max-height: 80%;
+    max-width: 80%;
+}
+
+.popup-img img {
+    /* Images */
+    object-fit: contain;
+    margin: 0.6em;
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.popup-img button {
+    /* Bouton de fermeture */
+    margin: 0.2em;
+    height : 0.8em;
+}
+
+.popup-info {
+    /* Popup contenant les informations complémentaires */
+    visibility: hidden ; /* Masqué par défaut */
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    max-height: 100%;
+}
+
+.popup-comm {
+    /* Popup dans lequel on peut laisser un commentaire*/
+    visibility: hidden ; /* Masqué par défaut */
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.8em;
+    z-index: 1000;
+    max-height: 100%;
+    width: 75%;
+}
+
+form {
+    /* Formulaire pour envoyer le commentaire */
+    width: 100%;
+    max-width: 80%;  
+    margin: 0 auto;    
+    padding: 0.4em;
+    border: none;
+    border-radius: 8px;
+}
+
+fieldset {
+    /* ENcart remplissable */
+    border: none;  
+    padding: 0;
+    font-family :'Raleway' ; /*Police d'écriture des cases du formulaire*/
+}
+
+label {
+    /* Nom de l'encart, affiché à côté */
+    font-size: 0.8em;  
+    margin-right: 10px; 
+    width: 20%;         
+}
+
+.input_comm{ /*Caractéristiques de la case du formulaire*/
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 3px;
+    width: 100%;
+    padding: 1%;
+    background-color: none; /*Couleur de la case*/
+    opacity: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="textarea"] {
+    /* Caractéristiques du texte affiché lors du remplissage */
+    flex-grow: 1;      
+    padding: 0.2em;
+    border: 1px solid rgb(118, 118, 118); 
+    border-radius: 5px;
+    font-size: 0.5em;            
+    width: 90%;          
+    height : 150%;     
+    font-family :'Raleway' ; /*Police d'écriture dans la partie blanche de chaque case du formulaire*/
+}
+
+.bouton-form{
+    /* Bouton de fermeture */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

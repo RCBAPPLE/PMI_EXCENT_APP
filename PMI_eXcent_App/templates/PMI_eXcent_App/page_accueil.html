@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ langue }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if langue == 'FR' %}Page d'accueil{% else %}Home page{% endif %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_page_accueil.css' %}?{% now 'U' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <h1>
+                {% if langue == 'FR' %}
+                    Page d'accueil de l'outil d'aide au diagnostic du JacXson U70
+                {% else %}
+                    JacXson U70 Diagnostic Tool Home Page
+                {% endif %}
+            </h1>
+            <a href="{% url 'PMI_eXcent_App:page_accueil' 'FR' %}">
+                <img src="{% static 'images/drapeau_français.png' %}" alt="Français" title="Version Française" class = "{% if langue == 'FR' %} active {% else %} desactive   {% endif %}" />
+            </a>
+            <a href="{% url 'PMI_eXcent_App:page_accueil' 'EN' %}">
+                <img src="{% static 'images/drapeau_anglais.png' %}" alt="English" title="English Version" class = "{% if langue == 'FR' %} desactive {% else %} active 
+                {% endif %}"/>
+            </a>
+        </div>
+    </header>
+    <br>
+    <main>
+        <form method="post">
+            {% csrf_token %}
+            <fieldset>
+                <!-- Client Field -->
+                <div class="input_one">
+                    <label for="{{ form.Client.id_for_label }}">
+                        {% if langue == 'FR' %}Client :{% else %}Customer :{% endif %}
+                    </label>
+                    {{ form.Client }}
+                </div>
+                <!-- JacXson SN Field -->
+                <div class="input_two">
+                    <label for="{{ form.SN_JacXson.id_for_label }}">
+                        {% if langue == 'FR' %}SN du JacXson :{% else %}JacXson SN :{% endif %}
+                    </label>
+                    {{ form.SN_JacXson }}
+                </div>
+                <!-- Technician Trigram Field -->
+                <div class="input_three">
+                    <label for="{{ form.Trigramme_Technicien.id_for_label }}">
+                        {% if langue == 'FR' %}Trigramme du technicien :{% else %}Technician's trigramme :{% endif %}
+                    </label>
+                    {{ form.Trigramme_Technicien }}
+                </div>
+            </fieldset>
+            <!-- Case pour démarrer le test -->
+            <input type="submit" value="{% if langue == 'FR' %}Démarrer le diagnostic{% else %}Start the diagnostic{% endif %}" /> <!-- Le text après "value" est 
+            le text présent dans le bouton pour démarrer le test -->
+            <!-- Fin de la case pour démarrer le test -->
+        </form>
+    </main>
+<!-- Fin du contenue principal (partie centrale de la page) -->
+
+<!-- Pied de page (Point d'information en bas à droite de la page) -->
+        <footer>
+            <span class="material-icons tooltip">help
+                <span class="tooltip-text">
+                <!-- Tout le text ci-dessous est le text qui s'affiche lorsque l'on passe la souris
+                 sur le point d'interrogation en bas de bage -->
+                {% if langue == 'FR' %} 
+                Cette page est la page d'accueil de l'outil d'aide au diagnostic pour le JacXson U70. Il est utile lorsque vous devez effectuer un diagnostic depuis votre domicile ou votre lieu de travail avec un client au téléphone.
+                Vous devez ici renseigner les trois champs qui sont : le nom du client au bout du fil, le SN du JacXson concerné par ce diagnostic ainsi que votre trigramme (ces informations permettront de préremplir le RIN à la fin du diagnostic).
+                Une fois ces trois champs renseignés, veuillez cliquer sur "Démarrer le diagnostic". Suite à cela, vous devrez répondre à une suite de questions qui vous permettrons de poser un premier diagnostic.<br>
+                <br>
+                Si vous avez besoin de plus d'informations sur la façon dont utiliser l'outil d'aide au diagnostic n'hesitez pas à consulter la notice d'utilisation de celui-ci.
+                {% else %}
+                This page is the homepage of the JacXson U70 diagnostic assistance tool.
+                It is useful when you need to perform diagnostics remotely with a client on the phone.
+                You must fill in the three fields: the customer's name, the JacXson SN, and your trigram. Once completed, click "Start the diagnostic".<br>
+                <br>
+                If you need more inforations on the way to use the JacXson U70 Diagnostic tool, feel free to consult its user manual.
+                {% endif %}
+                <!-- Fin du text -->
+                </span>
+            </span>
+        </footer>
+<!-- Fin du pied de page (Point d'information en bas à droite de la page) --> 
+</body>
+</html>

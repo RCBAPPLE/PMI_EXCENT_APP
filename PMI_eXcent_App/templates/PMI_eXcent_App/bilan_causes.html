@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ langue }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Bilan</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_page_bilan_causes.css' %}?{% now 'U' %}">
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Mise en Sécurité' '1'  %}" class="lien-logig">{% if langue == 'FR' %}Mise en sécurité{% else %}Safety{% endif %}</a>
+            <div class="triangle"></div>
+            <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Observations et examen' '1.1'  %}" class="lien-logig">{% if langue == 'FR' %}Observations et examen{% else %}Observations and Examination{% endif %}</a>
+            <div class="triangle"></div>
+
+            <div class="dropdown">
+                <a href="#" class="lien-logig dropdown-toggle">
+                    Diagnostic
+                </a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Alimentation' '1'  %}" class="dropdown-item">Alimentation</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Levage' '1'  %}" class="dropdown-item">Levage</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Ouverture' '1.0'  %}" class="dropdown-item">Ouverture</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Roulage' '1.0'  %}" class="dropdown-item">Roulage</a>
+                </div>
+            </div>
+
+            <div class="triangle"></div>
+            <a href="#" class="lien-logig">{% if langue == 'FR' %}Résolution{% else %}Resolution{% endif %}</a>
+            <a href="https://www.excent.fr/" class="lien-site">
+                <img src="{% static 'images/logo-excent-2.jpg' %}" alt="Logo eXcent" class="logo-accueil">
+            </a>
+        </nav>
+    </header>
+  
+ <!-- Contenu de la section Causes Racines -->
+    <div id="causes" class="content">
+        <div class="title-buttons">
+            <button id="causes_racines_button_disabled", class="tab" >Causes Racines</button>
+            <button id="bilan_button_active", class="tab" >Bilan</button>
+        </div>
+        <div class="rectangle">
+            <div class="box">Problèmes causés par :</div>
+            <div class="box">Résolution :</div>
+        </div>
+        {% if Solution %}
+        <div class="container">
+            <div class="box"> 
+                {% if langue == 'FR' %}
+                <ul>
+                    <li>{{Solution.cause_racine_1_FR}}</li>
+                    <li>{% if Solution.cause_racine_2_FR %} {{Solution.cause_racine_2_FR}} {% endif %}</li>
+                </ul>
+                {% else %}
+                <ul>
+                    <li>{{Solution.cause_racine_1_EN}} </li>
+                    <li>{% if Solution.cause_racine_2_EN %} {{Solution.cause_racine_2_EN}} {% endif %}</li>
+                </ul>
+                {% endif %}
+            </div>
+            <div class="box"> 
+                {% if langue == 'FR' %}
+                <ul>
+                    <li>{{Solution.resolution_1_FR}}</li>
+                    <li>{% if Solution.resolution_2_FR %} {{Solution.resolution_2_FR}} {% endif %}</li>
+                </ul>
+                {% else %}
+                <ul>
+                    <li>{{Solution.resolution_1_EN}}</li>
+                    <li>{% if Solution.resolution_2_EN %} {{Solution.resolution_2_EN }} {% endif %}</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div style = "display: flex; justify-content: center; align-items: center;margin-top: 10%;">
+            <strong style="color: red">{% if Txt_autre == 'nan' %} 
+                {% else %}{{ Txt_autre }} {% endif %}
+            </strong>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Contenu de la section Bilan -->
+    <div id="bilan" class="content">
+        <div class="title-buttons">
+            <button id="causes_racines_button_active", class="tab" >Causes Racines</button>
+            <button id="bilan_button_disabled" , class="tab">Bilan</button>
+        </div>
+        <div>
+        <h2>Informations du Diagnostic</h2>
+        <p><strong>Client :</strong> {{ Diagnostic.Client }}</p>
+        <p><strong>SN JacXson :</strong> {{ Diagnostic.SN_JacXson }}</p>
+        <p><strong>Trigramme Technicien :</strong> {{ Diagnostic.Trigramme_Technicien }}</p>
+        <p><strong>Langue utilisée :</strong>{% if langue == 'FR' %} Français{% else %} Anglais{% endif %}
+        </div>
+        
+        <!-- Tableau des résultats -->
+        <h2>Questions et Réponses</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Partie</th>
+                    <th>Question</th>
+                    <th>Réponse</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ forloop.counter }}</td> <!-- Numéro de la question -->
+                    <td>{{ result.Partie }}</td>    <!-- Partie associée -->
+                    <td>{{ result.Question }}</td>  <!-- Texte de la question -->
+                    <td>{{ result.Réponse }}</td>   <!-- Réponse à la question -->
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Aucun résultat trouvé pour ce diagnostic.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Download PDF Button -->
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'PMI_eXcent_App:export_pdf' diagnostic_id=Diagnostic.id lang=langue%}" class="download-button">
+                Télécharger le Bilan en PDF
+            </a>
+        </div>
+
+    </div>
+    <div class="button-container">
+        <a href="{% url 'PMI_eXcent_App:export_excel_language' diagnostic_id=Diagnostic.id lang=langue %}" class="download-button-RIN">
+        Télécharger le RIN
+        </a>
+    </div>
+
+
+    <!-- Script pour la navigation -->
+    <script>
+        document.getElementById("bilan_button_active").onclick = function () { myFunction() };
+
+        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        function myFunction() {
+            document.getElementById("causes").style.display = "none";
+            document.getElementById("bilan").style.display = "block";
+            document.getElementById("bilan_button_disabled").style.backgroundColor = "#66c966";
+            document.getElementById("bilan_button_disabled").style.color = "white";
+            document.getElementById("causes_racines_button_active").style.backgroundColor = "#b6ffb6";
+            document.getElementById("causes_racines_button_active").style.color = "black";
+            
+        }
+
+        document.getElementById("causes_racines_button_active").onclick = function () { myFunction2() };
+
+        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        function myFunction2() {
+            document.getElementById("bilan").style.display = "none";
+            document.getElementById("causes").style.display = "block";
+            document.getElementById("causes_racines_button_disabled").style.backgroundColor = "#66c966";
+            document.getElementById("causes_racines_button_disabled").style.color = "white";
+            document.getElementById("bilan_button_active").style.backgroundColor = "#b6ffb6";
+            document.getElementById("bilan_button_active").style.color = "black";
+            
+        }
+
+
+    </script>
+</body>
+</html>
