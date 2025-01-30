@@ -1,9 +1,6 @@
-import datetime
-from django.contrib import admin
 from django.db import models
-from django.utils import timezone
-from django import forms
 from django_mysql.models import ListCharField
+from django.utils.timezone import now
 
 
 
@@ -67,8 +64,18 @@ class Template_Question(models.Model):
     def __str__(self):
         return f"Question {self.id_question}: {self.question_texte_FR[:50]}"
 
+class Commentaire(models.Model):
+    diagnostic_id = models.IntegerField()
+    partie = models.CharField(max_length=100)  # Exemple : "Mise en sécurité"
+    id_question = models.CharField(max_length=10)  # Peut être '1', '1.0', etc.
+    commentaire = models.TextField()  # Contenu du commentaire
+    datetime = models.DateTimeField(default=now)  # Date et heure de création
 
-class Causes(models.Model):
+    def __str__(self):
+        return f"Commentaire {self.id} - Diagnostic {self.diagnostic_id}"
+
+
+class Cause(models.Model):
     Partie = models.CharField(max_length=100, default = "Mise en sécurité")
     Indice = models.CharField(max_length=10)
 

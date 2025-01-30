@@ -14,7 +14,15 @@ from django.conf import settings
 
 from .models import *
 
+def page_initial(request):
 
+    lang = 'FR'  # Default language is French
+
+    # Affichage initial
+    form = DiagnosticForm(lang=lang)
+
+    # Rendu de la page d'accueil avec le formulaire
+    return HttpResponseRedirect(reverse("PMI_eXcent_App:page_accueil", kwargs={"lang": lang}))
 
 def page_accueil(request, lang):
     if lang not in ['FR', 'EN']:
@@ -173,14 +181,14 @@ def page_results(request, lang, diagnostic_id, partie, id_solution, txt_solution
     
     # Essayer de récupérer les données des solutions
     try:
-        solution_data = Causes.objects.filter(
+        solution_data = Cause.objects.filter(
             Partie=partie,
             Indice=id_solution
         ).values()[0]  # Récupérer la première solution trouvée (si existante)
         
-        # Si des données sont trouvées, récupérer l'objet Causes correspondant
-        solution = Causes.objects.get(pk=solution_data["id"])
-    except (IndexError, Causes.DoesNotExist):
+        # Si des données sont trouvées, récupérer l'objet Cause correspondant
+        solution = Cause.objects.get(pk=solution_data["id"])
+    except (IndexError, Cause.DoesNotExist):
         # Aucune solution trouvée ou erreur d'accès aux données
         pass
 

@@ -7,7 +7,7 @@
 body{
     background-color: white;
     font-family: "Gill Sans MT", sans-serif;
-    font-size: 2em;   
+    font-size: clamp(1rem, 2vw, 3rem);   
 }
 
 h1 { 
@@ -136,8 +136,8 @@ nav {
     margin-right: 1em;
     margin-top : 0.1em;
     margin-bottom: 0.1em;
-    padding: 0.6em;  
-    height: 15em; 
+    padding: 0.6em;
+    height: clamp(15em, 2vh, 20em);
 }
 
 .acces-logig {

@@ -2,11 +2,6 @@ from django.contrib import admin
 
 from .models import *
 
-"""
-class ChoiceInline(admin.TabularInline):
-    model = Choice
-    extra = 3
-"""
 
 class QuestionAdmin(admin.ModelAdmin):
 
@@ -26,11 +21,12 @@ class DiagnosticAdmin(admin.ModelAdmin):
     fields = ["Client", "SN_JacXson", "Trigramme_Technicien"]
     inlines = [ResultInline]
 
-class CausesAdmin(admin.ModelAdmin):
+class CauseAdmin(admin.ModelAdmin):
     list_display = ["Indice","Partie"]
     list_filter = ["Partie"]
 
 
 admin.site.register(Diagnostic, DiagnosticAdmin)
 admin.site.register(Template_Question, QuestionAdmin)
-admin.site.register(Causes, CausesAdmin)
+admin.site.register(Cause, CauseAdmin)
+admin.site.register(Commentaire)
