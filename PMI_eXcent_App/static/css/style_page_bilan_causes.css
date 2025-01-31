@@ -1,13 +1,13 @@
 /* Corps de la page */
-body {
-    font-family: "Gill Sans MT", sans-serif;
-    font-size: clamp(1rem, 2vw, 2rem);
+* {
     margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+}
 
-    justify-content: flex-start; 
-    align-items: center;
+body {
+    background-color: #f5f5f5;
+    font-family: "Gill Sans MT", sans-serif;
+    font-size: clamp(1rem, calc(2vw - 0.5rem), 3rem);   
+    
 }
 
 
@@ -29,7 +29,6 @@ a:hover {
 
 /* La partie ci-après définit l'aspect de la partie supérieure de la page */
 nav {
-    font-size: 2rem;
     display:flex;
     justify-content: space-around;
     align-items: center;

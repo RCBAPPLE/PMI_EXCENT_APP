@@ -15,9 +15,13 @@ class Diagnostic(models.Model):
 
 
 class Result(models.Model):
+    #Diagnostic auquel les résultats des questions vont être rattachés
     Diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE)
+    # Partie dans laquelle la question a été répondue 
     Partie = models.CharField(max_length=100, default = "Mise en sécurité")
+    # Question qui a été répondue 
     Question = models.CharField(max_length=100)
+    # Réponse donnée
     Réponse = models.CharField(max_length=3)
 
 
@@ -31,29 +35,29 @@ class Template_Question(models.Model):
         size=5,
         max_length=(5 * 11),  # 5 * 10 character nominals, plus commas
         default = [],
-    )
+    ) # Exemple : "OUI,NON"
     partie = models.CharField(max_length=100)  # Exemple : "Mise en sécurité"
     noms_photos = models.CharField(max_length=255, blank=True, null=True)  # Exemple : "BMV.PNG"
     pictogrammes = models.CharField(max_length=255, blank=True, null=True)  # Exemple : "N/A"
-    info_comp = models.TextField(blank=True, default="")
+    info_comp = models.TextField(blank=True, default="") # Texte pour aider à comprendre la question
 
     # Questions suivantes
-    id_question_suivante_1 = models.CharField(max_length=10, blank=True, null=True)
-    partie_question_suivante_1 = models.CharField(max_length=100, blank=True, null=True)
-    question_suivante_1_texte = models.TextField( default="", blank=True, null=True)
+    id_question_suivante_1 = models.CharField(max_length=10, blank=True, null=True) # Peut être '1', '1.0', etc.
+    partie_question_suivante_1 = models.CharField(max_length=100, blank=True, null=True) # Exemple : "Mise en sécurité"
+    question_suivante_1_texte = models.TextField( default="", blank=True, null=True) # Texte de la question en francais sur la page
 
-    id_question_suivante_2 = models.CharField(max_length=10, blank=True, null=True)
-    partie_question_suivante_2 = models.CharField(max_length=100, blank=True, null=True)
-    question_suivante_2_texte = models.TextField( default="", blank=True, null=True)
+    id_question_suivante_2 = models.CharField(max_length=10, blank=True, null=True) # Peut être '1', '1.0', etc.
+    partie_question_suivante_2 = models.CharField(max_length=100, blank=True, null=True) # Exemple : "Mise en sécurité"
+    question_suivante_2_texte = models.TextField( default="", blank=True, null=True) # Texte de la question en francais sur la page
 
-    id_question_suivante_3 = models.CharField(max_length=10, blank=True, null=True)
-    partie_question_suivante_3 = models.CharField(max_length=100, blank=True, null=True)
+    id_question_suivante_3 = models.CharField(max_length=10, blank=True, null=True) # Peut être '1', '1.0', etc.
+    partie_question_suivante_3 = models.CharField(max_length=100, blank=True, null=True) # Exemple : "Mise en sécurité"
 
-    id_question_suivante_4 = models.CharField(max_length=10, blank=True, null=True)
-    partie_question_suivante_4 = models.CharField(max_length=100, blank=True, null=True)
+    id_question_suivante_4 = models.CharField(max_length=10, blank=True, null=True) # Peut être '1', '1.0', etc.
+    partie_question_suivante_4 = models.CharField(max_length=100, blank=True, null=True) # Exemple : "Mise en sécurité"
 
-    id_question_suivante_5 = models.CharField(max_length=10, blank=True, null=True)
-    partie_question_suivante_5 = models.CharField(max_length=100, blank=True, null=True)
+    id_question_suivante_5 = models.CharField(max_length=10, blank=True, null=True) # Peut être '1', '1.0', etc.
+    partie_question_suivante_5 = models.CharField(max_length=100, blank=True, null=True) # Exemple : "Mise en sécurité"
 
 
     class Meta:
@@ -65,7 +69,7 @@ class Template_Question(models.Model):
         return f"Question {self.id_question}: {self.question_texte_FR[:50]}"
 
 class Commentaire(models.Model):
-    diagnostic_id = models.IntegerField()
+    diagnostic_id = models.IntegerField() # Numéro de diagnostic auquel le commentaire est associé
     partie = models.CharField(max_length=100)  # Exemple : "Mise en sécurité"
     id_question = models.CharField(max_length=10)  # Peut être '1', '1.0', etc.
     commentaire = models.TextField()  # Contenu du commentaire

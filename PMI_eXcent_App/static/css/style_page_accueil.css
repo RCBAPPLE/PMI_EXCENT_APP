@@ -73,7 +73,7 @@ form {
     border-radius: 8px;
     position: relative;  
     background-image: url(../images/logo-excent.JPG);
-    background-size: 38%;
+    background-size: auto clamp(150px, 90%, 600px); 
     background-repeat: no-repeat;
     background-position: 5% center;
 }

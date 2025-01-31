@@ -3,6 +3,7 @@
 <html lang="{{ langue }}">
 <head>
     <meta charset="UTF-8">
+    <!-- Définition du style apporté au pdf -->
     <style>       
         body {
             font-family: "Gill Sans MT", sans-serif;
@@ -42,10 +43,10 @@
 <body>
     <div>
         <h2>Informations du Diagnostic</h2>
-        <p><strong>Client :</strong> {{ diagnostic.Client }}</p>
-        <p><strong>SN JacXson :</strong> {{ diagnostic.SN_JacXson }}</p>
-        <p><strong>Trigramme Technicien :</strong> {{ diagnostic.Trigramme_Technicien }}</p>
-        <p><strong>Langue utilisée :</strong>{% if langue == 'FR' %} Français{% else %} Anglais{% endif %}
+        <p><strong>Client :</strong> {{ diagnostic.Client }}</p> <!-- Nom du Client -->
+        <p><strong>SN JacXson :</strong> {{ diagnostic.SN_JacXson }}</p> <!-- SN du JacXson -->
+        <p><strong>Trigramme Technicien :</strong> {{ diagnostic.Trigramme_Technicien }}</p> <!-- Trigramme du Technicien -->
+        <p><strong>Langue utilisée :</strong>{% if langue == 'FR' %} Français{% else %} Anglais{% endif %} <!-- Langue utilisée lors du questionnaire -->
         </div>
         
         <!-- Tableau des résultats -->

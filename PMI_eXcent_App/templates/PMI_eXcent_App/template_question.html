@@ -2,137 +2,195 @@
 <!DOCTYPE html>
 <html lang="{{ langue }}">
 <head>
+    <!-- Définition des propriétés de la page, ne pas toucher si simple mise à jour -->
     <meta charset="UTF-8">
     <title>{% if langue == 'FR' %}Questionnaire d'aide au diagnostic{% else %}Diagnostic Questionnaire{% endif %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/question_style.css' %}?{% now 'U' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<header>
-    <nav>
-        <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Mise en Sécurité' '1'  %}" class="lien-logig">{% if langue == 'FR' %}Mise en sécurité{% else %}Safety{% endif %}</a>
-        <div class="triangle"></div>
-        <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Observations et examen' '1.1'  %}" class="lien-logig">{% if langue == 'FR' %}Observations et examen{% else %}Observations and Examination{% endif %}</a>
-        <div class="triangle"></div>
+    <header>
+        <!-- Liens vers les différentes parties du questionnaire, apparait en haut de la page. -->
+        <nav>
+            <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Mise en Sécurité' '1' question.partie question.id_question %}" class="lien-logig">{% if langue == 'FR' %}Mise en sécurité{% else %}Safety{% endif %}</a>
+            <div class="triangle"></div>
+            <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Observations et examen' '1.1' question.partie question.id_question  %}" class="lien-logig">{% if langue == 'FR' %}Observations et examen{% else %}Observations and Examination{% endif %}</a>
+            <div class="triangle"></div>
 
-        <div class="dropdown">
-            <a href="#" class="lien-logig dropdown-toggle">
-                Diagnostic
-            </a>
-            <div class="dropdown-menu">
-                <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Alimentation' '1'  %}" class="dropdown-item">Alimentation</a>
-                <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Levage' '1'  %}" class="dropdown-item">Levage</a>
-                <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Ouverture' '1.0'  %}" class="dropdown-item">Ouverture</a>
-                <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic_id 'Roulage' '1.0'  %}" class="dropdown-item">Roulage</a>
+            <div class="dropdown">
+                <a href="#" class="lien-logig dropdown-toggle">
+                    Diagnostic
+                </a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Alimentation' '1' question.partie question.id_question %}" class="dropdown-item">Alimentation</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Levage' '1' question.partie question.id_question %}" class="dropdown-item">Levage</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Ouverture' '1.0' question.partie question.id_question %}" class="dropdown-item">Ouverture</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_question' langue Diagnostic_id 'Roulage' '1.0' question.partie question.id_question %}" class="dropdown-item">Roulage</a>
+                </div>
             </div>
-        </div>
 
-        <div class="triangle"></div>
-        <a href="#" class="lien-logig">{% if langue == 'FR' %}Résolution{% else %}Resolution{% endif %}</a>
-        <a href="https://www.excent.fr/" class="lien-site">
-            <img src="{% static 'images/logo-excent-2.jpg' %}" alt="Logo eXcent" class="logo-accueil">
-        </a>
-    </nav>
-</header>
-<main>
-    <div class="main-grid">
-        <!-- Bouton d'accès au logigramme actif -->
-        <div class="acces-logig">
-            <a onclick="openPopup_logig()">{% if langue == 'FR' %}Accès logigramme{% else %}Access to the logigram{% endif %}</a>
-        </div>
-        <!-- Bouton d'accès au popup permettant de laisser un commentaire -->
-        <div class="comm">
-            <a onclick="openPopup_comm()">{% if langue == 'FR' %}Commentaires :{% else %}Comment:{% endif %}</a>
-        </div>
-        <!-- Image associée à la question -->
-        {% if question.noms_photos %}
-        <div class="image-question">
-            
-            <a onclick="openPopup_img()">
-                <img src="{% static 'images/' %}{{ question.noms_photos }}" alt="Image associée à la question" class="img-q">
+            <div class="triangle"></div>
+            <a href="#" class="lien-logig">{% if langue == 'FR' %}Résolution{% else %}Resolution{% endif %}</a>
+            <a href="https://www.excent.fr/" class="lien-site">
+                <img src="{% static 'images/logo-excent-2.jpg' %}" alt="Logo eXcent" class="logo-accueil">
             </a>
-            
-        </div>
-        {% endif %}
-        <!-- Question -->
-        <div class="question-grid response-count-{{ question.typeofquestion|length }}">
-            <div class="logi-actif">{{ question.partie }}</div>
-            {% if question.pictogrammes %}
-            <div class="pictogramme">
-                <!-- Changer la ligne en blanc ci-après change le texte devant les pictogrammes -->
-                Attention danger !
-                <img src="{% static 'images/' %}{{ question.pictogrammes }}" alt="Pictogramme" class="img-pict">
+        </nav>
+    </header>
+    <main>
+
+        <!-- Définition des éléments principaux de la page -->
+        <div class="main-grid">
+
+            <!-- Bouton d'accès au logigramme actif -->
+            <div class="acces-logig">
+                <a onclick="openPopup_logig()">{% if langue == 'FR' %}Accès logigramme{% else %}Access to the logigram{% endif %}</a>
+            </div>
+
+            <!-- Bouton d'accès au popup permettant de laisser un commentaire -->
+            <div class="comm">
+                <a onclick="openPopup_comm()">{% if langue == 'FR' %}Commentaires :{% else %}Comment:{% endif %}
+                </a>
+            </div>
+
+            <!-- Bouton d'accès à l'illustration de la question -->
+            {% if question.noms_photos %}
+            <div class="image-question">
                 
+                <a onclick="openPopup_img()">
 
+                    <!-- Ne mettre qu'une seule image ci-après, elle servira alors de miniature cliquable -->
+                    <img src="{% static 'images/' %}{{ question.noms_photos }}" alt="Image associée à la question" class="img-q">
+                </a>
+                
             </div>
             {% endif %}
-            <div class="question">{% if langue == 'FR' %}{{question.question_texte_FR}}{% else %}{{question.question_texte_EN}}{% endif %}</div>
-            <!-- Réponses Oui / Non -->
 
-            {% for reponse in question.typeofquestion %}
-            <div class="reponse reponse-{{ forloop.counter }}">
-                <a href="{% url 'PMI_eXcent_App:page_question' langue Diagnostic_id question.partie question.id_question forloop.counter %}">
-                    {% if langue == 'FR' %}
-                        {{ reponse }}
-                    {% else %}
-                        {% if reponse == 'OUI' %}
-                        YES
-                        {%  elif reponse == 'NON' %}
-                        NO
+            <!-- Définition de la zone de la question -->
+            <div class="question-grid response-count-{{ question.typeofquestion|length }}">
+
+                <!-- Le texte blanc sur la ligne d'après, affiche le nom du logigramme actif, de manière automatique -->
+                <div class="logi-actif">{{ question.partie }}</div>
+
+                <!-- Définition des pictogrammes de danger -->
+                {% if question.pictogrammes %}
+                <div class="pictogramme">
+                    <!-- Changer la ligne en blanc ci-après change le texte devant les pictogrammes -->
+                    Attention danger !
+                    <!-- Le pictogramme associé à la question est listé ci-dessous. La valeur de l’attribut title indique le danger représenté par ce pictogramme. -->
+                    <img src="{% static 'images/' %}{{ question.pictogrammes }}" alt="Pictogramme" title="{{ question.pictogrammes|slice:':-4' }}" class="img-pict">  
+
+                </div>
+                {% endif %}
+
+                <!-- Le texte en blanc correspond à la question -->
+                <div class="question">{% if langue == 'FR' %}{{question.question_texte_FR}}{% else %}{{question.question_texte_EN}}{% endif %}</div>
+                
+                <!-- On affiche ici les différents types de réponses possibles -->
+                {% for reponse in question.typeofquestion %}
+                <div class="reponse reponse-{{ forloop.counter }}">
+                    <a href="{% url 'PMI_eXcent_App:page_question' langue Diagnostic_id question.partie question.id_question forloop.counter %}">
+                        {% if langue == 'FR' %}
+                            {{ reponse }}
                         {% else %}
-                        {{ reponse }}
+                        <!-- Si la langue n'est pas le français, on suppose anglais. Alors pour les réponse 'OUI' et 'NON', on traduit directement. Sinon on laisse la réponse en français. -->
+                            {% if reponse == 'OUI' %}
+                            YES
+                            {%  elif reponse == 'NON' %}
+                            NO
+                            {% else %}
+                            {{ reponse }}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </a>
-            </div>
-            {% endfor %}
+                    </a>
+                </div>
+                {% endfor %}
 
-            <!-- Bouton retour -->
-            {% if question_precedente %}
-            <div class="fleche-retour">
-                <a href="{% url 'PMI_eXcent_App:page_precedente' langue Diagnostic_id question_precedente.partie question_precedente.id_question %}">
-                    <span class="material-icons">keyboard_return</span>
-                    {% if langue == 'FR' %}Retour arrière{% else %}Go back{% endif %}
-                </a>
-            </div>
-            {% endif %}
+                <!-- Définition du bouton de retour en arrière -->
+                {% if bouton_precedente %}
+                <div class="fleche-retour">
+                    <a href="{% url 'PMI_eXcent_App:page_precedente' langue Diagnostic_id question.partie question.id_question %}">
+                        <span class="material-icons">keyboard_return</span>
+                        {% if langue == 'FR' %}Retour arrière{% else %}Go back{% endif %}
+                    </a>
+                </div>
+                {% endif %}
 
-            <!-- Informations supplémentaires -->
-            <div class="info">
-                <a onclick="openPopup_info()">
-                    <span class="material-icons">info</span>
-                    {% if langue == 'FR' %}Informations{% else %}Information{% endif %}
-                </a>
+                <!-- Définition du bouton d'informations complémentaires -->
+                <div class="info">
+                    <a onclick="openPopup_info()">
+                        <span class="material-icons">info</span>
+                        {% if langue == 'FR' %}Informations{% else %}Information{% endif %}
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Popups -->
-    <div class="overlay" id="overlay"></div>
-    <div class="popup-logig" id="popup-logig">
-        <img src="{% static 'images/logigrammes/logigramme'%} {{ question.partie }}.png" alt="Logigramme actif">
-        <button onclick="closePopup_logig()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
-    </div>
-    <div class="popup-comm" id="popup-comm">
-        <form action="" method="post">
-            {% csrf_token %}
-            <textarea name="comment" rows="5" cols="33" required placeholder="{% if langue == 'FR' %}Écrire ici{% else %}Write here{% endif %}"></textarea>
-            <input type="submit" value="{% if langue == 'FR' %}Soumettre{% else %}Submit{% endif %}">
-            <button onclick="closePopup_comm()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
-        </form>
-    </div>
-    <div class="popup-img" id="popup-img">
-        <img src="{% static 'images/' %}{{ question.noms_photos }}" alt="Illustration de la question">
-        <button onclick="closePopup_img()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
-    </div>
-    <div class="popup-info" id="popup-info">
-        <h2>{% if langue == 'FR' %}Informations complémentaires{% else %}Additional information{% endif %}</h2>
-        <p>{{ question.question_suivante_oui }}</p>
-        <button onclick="closePopup_info()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
-    </div>
-</main>
-<footer>
-</footer>
-<script src="{% static 'js/question_java.js' %}"></script>
+        <!-- Création des popup -->
+
+        <!-- L'overlay permet de griser le reste de l'écran quand le popup apparait. Il est désactivé par défaut. -->
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Définition du popup permettant d'accéder au logigramme actif -->
+        <div class="popup-logig" id="popup-logig">
+            <img src="{% static 'images/logigrammes/logigramme'%} {{ question.partie }}.png" alt="Logigramme actif">
+            <button type="button" onclick="closePopup_logig()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
+            <!-- Le texte en blanc dans le bouton est le texte qui s'affiche sur le bouton de fermeture -->
+        </div>
+
+        <!-- Définition du popup permettant de laisser un commentaire sur la question en cours -->
+        <div class="popup-comm" id="popup-comm">
+
+            <form id="commentaireForm" action="{% url 'PMI_eXcent_App:enregistrer_commentaire' %} " method="post" onsubmit="envoyerCommentaire(); return false;">
+                {% csrf_token %}
+                <fieldset>
+                    <div class="input_comm">
+                        <label for="Commentaire"><h2>Commentaire:</h2></label> <!-- Le texte blanc représente le texte 
+                            présent au début de la case -->
+                        <textarea name="comment" rows="5" cols="33" required 
+                            placeholder="{% if langue == 'FR' %}Écrire ici{% else %}Write here{% endif %}"></textarea>
+                            <!-- Le texte après "placeholder" est ce qui sera écris dans le fond de la case à remplir  -->
+                
+                    </div>
+                </fieldset>
+                <input type="hidden" name="diagnostic_id" value="{{ Diagnostic_id }}">
+                <input type="hidden" name="question_id" value="{{ question.id_question }}">
+                <input type="hidden" name="partie" value="{{ question.partie }}">
+                <!-- C'est 3 inputs permettent de transmettre les informations au back-end afin d'améliorer le référencement des commentaires en fonction du diagnostic, de la question et de la section où ils ont été formulés. -->
+                <div class="bouton-form">
+                    <input type="submit" value="{% if langue == 'FR' %}Soumettre{% else %}Submit{% endif %}">
+                    <!-- Le texte après "value" est le texte présent dans le bouton pour démarrer le test -->
+                    <!-- Fin de la case pour démarrer le test -->
+                    <button type="button" onclick="closePopup_comm()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
+                </div>
+            </form>
+
+            <!-- Message de confirmation popup -->
+            <div id="confirmationPopup" class="confirmation-popup">
+                <p id="message"></p>
+            </div>
+
+        </div>
+
+        <!-- Définition du popup permettant de visualiser l'image associée à la question -->
+        <div class="popup-img" id="popup-img">
+            <!-- L'image est alors défini sous le format suivant : -->
+            <img src="{% static 'images/' %}{{ question.noms_photos }}" alt="Illustration de la question">
+            <button onclick="closePopup_img()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
+        </div>
+
+        <!-- Définition du popup permettant de visualiser les informations complémentaires sur la question -->
+        <div class="popup-info" id="popup-info">
+            <h2>{% if langue == 'FR' %}Informations complémentaires{% else %}Additional information{% endif %}</h2>
+
+            <!-- Entre les balises <p> se trouve le texte des infos complémentaires -->
+            <p>{% if question.info_comp == 'nan' %}{%else%}{{ question.info_comp }}{% endif %}</p>
+            <button type="button" onclick="closePopup_info()">{% if langue == 'FR' %}Fermer{% else %}Close{% endif %}</button>
+        </div>
+
+    </main>
+
+    <!-- La ligne ci-après lie la partie html à la partie java du code -->
+    <script src="{% static 'js/question_java.js' %}"></script>
+
 </body>
 </html>

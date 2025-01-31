@@ -1,5 +1,5 @@
 import pandas as pd
-from .models import Template_Question, Causes
+from .models import Template_Question, Cause
 
 
 import os
@@ -121,8 +121,8 @@ def load_causes(data):
             resolution_1_EN = str(row['Résolution 1 EN']).strip() if pd.notna(row['Résolution 1 EN']) else None
             resolution_2_EN = str(row['Résolution 2 EN']).strip() if pd.notna(row['Résolution 2 EN']) else None
 
-            # Création d'un nouvel enregistrement dans la table Causes
-            Causes.objects.create(
+            # Création d'un nouvel enregistrement dans la table Cause
+            Cause.objects.update_or_create(
                 Partie=partie,
                 Indice=indice,
                 cause_racine_1_FR=cause_racine_1_FR,
@@ -145,4 +145,4 @@ def load_causes(data):
 
 # Exemple d'utilisation
 load_excel_database('PMI_eXcent_App/static/docs/Base_de_donnees_pages_de_questions.xlsx')
-#load_excel_database('PMI_eXcent_App/static/docs/BDD_causes_racines_et_resolutions.xlsx')
+load_excel_database('PMI_eXcent_App/static/docs/BDD_causes_racines_et_resolutions.xlsx')

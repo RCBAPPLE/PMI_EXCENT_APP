@@ -26,7 +26,11 @@ class CauseAdmin(admin.ModelAdmin):
     list_filter = ["Partie"]
 
 
+class CommentaireAdmin(admin.ModelAdmin):
+    list_display = ["diagnostic_id","partie","id_question", "datetime"]
+    list_filter = ["partie"]
+
 admin.site.register(Diagnostic, DiagnosticAdmin)
 admin.site.register(Template_Question, QuestionAdmin)
 admin.site.register(Cause, CauseAdmin)
-admin.site.register(Commentaire)
+admin.site.register(Commentaire, CommentaireAdmin)

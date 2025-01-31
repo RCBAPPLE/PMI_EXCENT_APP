@@ -12,9 +12,9 @@
 
     <header>
         <nav>
-            <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Mise en Sécurité' '1'  %}" class="lien-logig">{% if langue == 'FR' %}Mise en sécurité{% else %}Safety{% endif %}</a>
+            <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Mise en Sécurité' '1'  %}" class="lien-logig">{% if langue == 'FR' %}Mise en sécurité{% else %}Safety{% endif %}</a>
             <div class="triangle"></div>
-            <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Observations et examen' '1.1'  %}" class="lien-logig">{% if langue == 'FR' %}Observations et examen{% else %}Observations and Examination{% endif %}</a>
+            <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Observations et examen' '1.1'  %}" class="lien-logig">{% if langue == 'FR' %}Observations et examen{% else %}Observations and Examination{% endif %}</a>
             <div class="triangle"></div>
 
             <div class="dropdown">
@@ -22,10 +22,10 @@
                     Diagnostic
                 </a>
                 <div class="dropdown-menu">
-                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Alimentation' '1'  %}" class="dropdown-item">Alimentation</a>
-                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Levage' '1'  %}" class="dropdown-item">Levage</a>
-                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Ouverture' '1.0'  %}" class="dropdown-item">Ouverture</a>
-                    <a href="{% url 'PMI_eXcent_App:saut_partie' langue Diagnostic.id 'Roulage' '1.0'  %}" class="dropdown-item">Roulage</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Alimentation' '1'  %}" class="dropdown-item">Alimentation</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Levage' '1'  %}" class="dropdown-item">Levage</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Ouverture' '1.0'  %}" class="dropdown-item">Ouverture</a>
+                    <a href="{% url 'PMI_eXcent_App:saut_partie_page_bilan' langue Diagnostic.id 'Roulage' '1.0'  %}" class="dropdown-item">Roulage</a>
                 </div>
             </div>
 
@@ -159,7 +159,8 @@
     <script>
         document.getElementById("bilan_button_active").onclick = function () { myFunction() };
 
-        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        /* myFunction alterne entre l'ajout et la suppression de la classe "show", qui est utilisée pour masquer et afficher le contenu du menu déroulant */
+        
         function myFunction() {
             document.getElementById("causes").style.display = "none";
             document.getElementById("bilan").style.display = "block";
@@ -172,7 +173,8 @@
 
         document.getElementById("causes_racines_button_active").onclick = function () { myFunction2() };
 
-        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        /* myFunction2 alterne entre l'ajout et la suppression de la classe "show", qui est utilisée pour masquer et afficher le contenu du menu déroulant */
+
         function myFunction2() {
             document.getElementById("bilan").style.display = "none";
             document.getElementById("causes").style.display = "block";

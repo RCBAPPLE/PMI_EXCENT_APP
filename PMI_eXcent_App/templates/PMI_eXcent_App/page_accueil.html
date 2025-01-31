@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+<!-- entête de page -->
     <header>
         <div class="banner">
             <h1>
@@ -26,32 +28,47 @@
             </a>
         </div>
     </header>
-    <br>
+<!-- Fin de l'entête de page -->
+
+<!-- Contenue principal (partie centrale de la page) -->
     <main>
+        <br>
         <form method="post">
             {% csrf_token %}
             <fieldset>
-                <!-- Client Field -->
+                <!-- Case pour renseigner le Client -->
                 <div class="input_one">
                     <label for="{{ form.Client.id_for_label }}">
                         {% if langue == 'FR' %}Client :{% else %}Customer :{% endif %}
-                    </label>
-                    {{ form.Client }}
+                    </label> <!-- Le texte blanc représente le texte 
+                        présent au début de la case -->
+
+                    {{ form.Client }} <!-- Ce texte remplace l'input du Client, qui a été défini dans Django  -->
                 </div>
-                <!-- JacXson SN Field -->
+                <!-- Fin de la case pour renseigner le Client -->
+
+                <!-- Case pour reinseigner le SN du JacXson -->
                 <div class="input_two">
                     <label for="{{ form.SN_JacXson.id_for_label }}">
                         {% if langue == 'FR' %}SN du JacXson :{% else %}JacXson SN :{% endif %}
-                    </label>
-                    {{ form.SN_JacXson }}
+                    </label><!-- Le texte blanc représente le texte 
+                        présent au début de la case -->
+
+                    {{ form.SN_JacXson }} <!-- Ce texte remplace l'input du SN du JacXson, qui a été défini dans Django  -->
                 </div>
-                <!-- Technician Trigram Field -->
+                <!-- Fin de la case pour reinseigner le SN du JacXson -->
+
+                <!-- Case pour renseigner le trigramme du technicien -->
                 <div class="input_three">
                     <label for="{{ form.Trigramme_Technicien.id_for_label }}">
                         {% if langue == 'FR' %}Trigramme du technicien :{% else %}Technician's trigramme :{% endif %}
-                    </label>
-                    {{ form.Trigramme_Technicien }}
+                    </label> <!-- Le texte blanc 
+                        représente le texte présent au début de la case -->
+
+                    {{ form.Trigramme_Technicien }}<!-- Ce texte remplace l'input du Trigramme du technicien, qui a été défini dans Django  -->
                 </div>
+                <!-- Fin de la case pour renseigner le trigramme du technicien -->
+
             </fieldset>
             <!-- Case pour démarrer le test -->
             <input type="submit" value="{% if langue == 'FR' %}Démarrer le diagnostic{% else %}Start the diagnostic{% endif %}" /> <!-- Le text après "value" est 
@@ -73,6 +90,7 @@
                 Une fois ces trois champs renseignés, veuillez cliquer sur "Démarrer le diagnostic". Suite à cela, vous devrez répondre à une suite de questions qui vous permettrons de poser un premier diagnostic.<br>
                 <br>
                 Si vous avez besoin de plus d'informations sur la façon dont utiliser l'outil d'aide au diagnostic n'hesitez pas à consulter la notice d'utilisation de celui-ci.
+                <!-- Fin du texte en français -->
                 {% else %}
                 This page is the homepage of the JacXson U70 diagnostic assistance tool.
                 It is useful when you need to perform diagnostics remotely with a client on the phone.
@@ -80,7 +98,7 @@
                 <br>
                 If you need more inforations on the way to use the JacXson U70 Diagnostic tool, feel free to consult its user manual.
                 {% endif %}
-                <!-- Fin du text -->
+                <!-- Fin du texte en anglais -->
                 </span>
             </span>
         </footer>
